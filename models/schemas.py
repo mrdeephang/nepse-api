@@ -5,13 +5,16 @@ from datetime import datetime
 class StockData(BaseModel):
     symbol: str = Field(..., description="Stock symbol")
     company_name: str = Field(..., description="Company name")
-    open_price: float = Field(..., description="Opening price")
-    high_price: float = Field(..., description="High price")
-    low_price: float = Field(..., description="Low price")
-    close_price: float = Field(..., description="Closing price")
-    volume: int = Field(..., description="Trading volume")
-    change: float = Field(..., description="Price change")
-    change_percent: float = Field(..., description="Percentage change")
+    open_price: Optional[float] = Field(None, description="Opening price")
+    high_price: Optional[float] = Field(None, description="High price")
+    low_price: Optional[float] = Field(None, description="Low price")
+    close_price: Optional[float] = Field(None, description="Closing price")
+    volume: Optional[int] = Field(None, description="Trading volume")
+    change: Optional[float] = Field(None, description="Price change")
+    change_percent: Optional[float] = Field(None, description="Percentage change")
+
+    class Config:
+        extra = "ignore"  # Ignore extra fields from scraper
 
 class AdvanceDecline(BaseModel):
     advances: int = Field(..., description="Number of advancing stocks")

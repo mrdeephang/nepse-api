@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime
 from typing import List, Optional
 import logging
-
+from utils.helpers import cache_manager
 # Import models
 from models.schemas import (
     LiveMarketResponse, MarketSummaryResponse, StockDetailResponse, 
@@ -379,6 +379,16 @@ async def api_info():
         ],
         "timestamp": datetime.now().isoformat()
     }
+
+@app.get("/api/debug/raw-data")
+async def debug_raw_data(scraper: OptimalNepseScraper = Depends(get_scraper)):
+    """Debug endpoint to see raw data structure"""
+    try:
+        data = await scraper.get_live_market_data()
+        return data
+    except Exception as e:
+        logger.error(f"Debug endpoint error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Run the application
 if __name__ == "__main__":
