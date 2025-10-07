@@ -4,10 +4,8 @@ FastAPI service for Nepal Stock Exchange data with real-time scraping.
 
 ## Features
 
-- Live market data
 - Market summary
-- Stock details
-- Top gainers/losers
+- Stock details by symbol
 - Auto-generated Swagger docs
 
 ## Quick Start
@@ -26,8 +24,5 @@ Visit: http://localhost:8000
 
 ## Endpoints
 
-- GET /api/market/live - Live data
 - GET /api/market/summary - Market summary
 - GET /api/stock/{symbol} - Stock details
-- GET /api/market/top-gainers - Top gainers
-- GET /api/market/top-losers - Top losers
